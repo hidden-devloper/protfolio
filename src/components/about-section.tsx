@@ -17,12 +17,6 @@ export default function AboutSection() {
                 </div>
               </div>
               <h3 className="text-2xl font-headline font-semibold">Who I Am</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 text-left">
-                  <div>
-                      <p className="text-primary font-semibold">Name:</p>
-                      <p>Tashmiya naaz</p>
-                  </div>
-              </div>
               <p className="text-foreground/80 leading-relaxed text-left pt-4 border-t border-border">
                 Assalamualaikum I’m Tashmiya naaz, a dedicated Software Engineering student with a passion for technology and innovation. I love creating digital solutions that are both creative and user-friendly. I’m always eager to learn new skills and grow in the world of software development.
               </p>
