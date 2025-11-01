@@ -3,65 +3,13 @@ import { useState, useEffect } from 'react';
 import AnimatedBackground from './animated-background';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import {CheckCircle} from 'lucide-react';
 
 const services = [
-  'make websites 💻',
-  'make apps 📱',
-  'do SEO 🚀',
-  'develop software',
+  'Web Development & Design',
+  'Android App Development',
+  'Video Editing',
 ];
-
-const TypingEffect = () => {
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-
-  useEffect(() => {
-    if (index === services.length) {
-      setIndex(0);
-      return;
-    }
-
-    const currentService = services[index];
-
-    if (isDeleting) {
-      if (subIndex === 0) {
-        setIsDeleting(false);
-        setIndex((prev) => (prev + 1) % services.length);
-        const holdTimeout = setTimeout(() => {}, 2000);
-        return () => clearTimeout(holdTimeout);
-      }
-      const timeout = setTimeout(() => {
-        setText(currentService.substring(0, subIndex - 1));
-        setSubIndex((prev) => prev - 1);
-      }, 30);
-      return () => clearTimeout(timeout);
-    }
-
-    if (subIndex === currentService.length) {
-      const delay = setTimeout(() => setIsDeleting(true), 2500);
-      return () => clearTimeout(delay);
-    }
-
-    const timeout = setTimeout(() => {
-      setText(currentService.substring(0, subIndex + 1));
-      setSubIndex((prev) => prev + 1);
-    }, 75);
-
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, isDeleting]);
-
-  return (
-    <div className="flex flex-col items-center justify-center text-xl md:text-2xl font-medium mb-8 h-14">
-      <div className="flex items-center h-8">
-        <span>i can&nbsp;</span>
-        <span className="text-primary">{text}</span>
-        <span className="animate-blink border-r-2 border-primary ml-1" />
-      </div>
-    </div>
-  );
-};
 
 export default function HomeSection() {
   return (
@@ -71,7 +19,17 @@ export default function HomeSection() {
         <h1 className="text-5xl md:text-7xl font-bold font-headline mb-4 animate-fade-in-down">
           <span>naaz.dev</span>
         </h1>
-        <TypingEffect />
+        <div className="mb-8 text-left">
+          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Services We Offer:</h2>
+          <ul className="space-y-2 text-lg md:text-xl">
+            {services.map((service, index) => (
+              <li key={index} className="flex items-center">
+                <CheckCircle className="h-6 w-6 text-primary mr-3" />
+                <span>{service}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
         <Link href="#contact" passHref>
           <Button size="lg" className="font-bold">
               Get In Touch

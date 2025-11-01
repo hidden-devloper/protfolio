@@ -16,7 +16,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="text-sm text-foreground/60">
-            &copy; {new Date().getFullYear()} naaz.dev. All rights reserved.
+            &copy; {new Date().getFullYear()} Tashmiya naaz. All rights reserved.
           </p>
         </div>
       </div>
