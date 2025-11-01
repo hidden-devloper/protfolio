@@ -45,9 +45,6 @@ export default function HomeSection() {
     <section id="home" className="relative flex items-center justify-center min-h-screen text-center overflow-hidden px-4">
       <AnimatedBackground />
       <div className="z-10 flex flex-col items-center">
-        <h1 className="text-5xl md:text-7xl font-bold font-headline mb-4 animate-fade-in-down">
-          <span>Tashmiya naaz</span>
-        </h1>
         <div className="mb-8 text-left">
            <div className="relative h-10">
             <span className="text-2xl md:text-3xl text-primary font-bold">
