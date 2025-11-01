@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import AnimatedBackground from './animated-background';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import {CheckCircle} from 'lucide-react';
 
 const services = [
   'Web Development & Design',
@@ -12,23 +11,50 @@ const services = [
 ];
 
 export default function HomeSection() {
+  const [serviceIndex, setServiceIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const typingSpeed = 100;
+  const deletingSpeed = 50;
+  const delay = 2000;
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const currentService = services[serviceIndex];
+      if (isDeleting) {
+        if (displayedText.length > 0) {
+          setDisplayedText((prev) => prev.substring(0, prev.length - 1));
+        } else {
+          setIsDeleting(false);
+          setServiceIndex((prev) => (prev + 1) % services.length);
+        }
+      } else {
+        if (displayedText.length < currentService.length) {
+          setDisplayedText((prev) => currentService.substring(0, prev.length + 1));
+        } else {
+          setTimeout(() => setIsDeleting(true), delay);
+        }
+      }
+    };
+
+    const typingTimeout = setTimeout(handleTyping, isDeleting ? deletingSpeed : typingSpeed);
+    return () => clearTimeout(typingTimeout);
+  }, [displayedText, isDeleting, serviceIndex]);
+
   return (
     <section id="home" className="relative flex items-center justify-center min-h-screen text-center overflow-hidden px-4">
       <AnimatedBackground />
       <div className="z-10 flex flex-col items-center">
         <h1 className="text-5xl md:text-7xl font-bold font-headline mb-4 animate-fade-in-down">
-          <span>naaz.dev</span>
+          <span>Tashmiya naaz</span>
         </h1>
         <div className="mb-8 text-left">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4">Services We Offer:</h2>
-          <ul className="space-y-2 text-lg md:text-xl">
-            {services.map((service, index) => (
-              <li key={index} className="flex items-center">
-                <CheckCircle className="h-6 w-6 text-primary mr-3" />
-                <span>{service}</span>
-              </li>
-            ))}
-          </ul>
+           <div className="relative h-10">
+            <span className="text-2xl md:text-3xl text-primary font-bold">
+              {displayedText}
+            </span>
+            <span className="inline-block w-1 h-8 md:h-9 bg-primary animate-blink align-bottom ml-1"></span>
+          </div>
         </div>
         <Link href="#contact" passHref>
           <Button size="lg" className="font-bold">
